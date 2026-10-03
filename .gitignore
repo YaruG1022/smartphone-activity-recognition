@@ -1,0 +1,16 @@
+# Local data, trained models, and experiment output
+ml/data/
+ml/models/
+ml/outputs/
+
+# Python
+ml/.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Android and IDE output
+.gradle/
+.idea/
+**/build/
+local.properties
