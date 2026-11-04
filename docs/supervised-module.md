@@ -75,6 +75,11 @@ input. Reload and compare on six training windows, one per class, with
 `atol=1e-4, rtol=1e-3` and matching predictions. This is a CPU format check;
 Android runtime compatibility remains untested.
 
+When publishing a report, `package_exports` adds a local `export-manifest.json`
+and the exact training normalization alongside each selected `.pt2`. The
+manifest records model/checkpoint hashes, preprocessing, channel/class order,
+fixed input shape, logits semantics, runtime, seed, epoch, and provenance.
+
 Training time includes the epoch loop, validation, and metrics. It excludes
 initial imports, data preparation, separate sanity checks, and export. Desktop
 timing uses 10 warmup and 50 timed CPU calls at batch size 1. Logistic timing
@@ -91,8 +96,10 @@ the optional comparison and notebook dependencies:
 ```text
 python -m pip install torch==2.9.1 --index-url https://download.pytorch.org/whl/cpu
 python -m pip install -e "./ml[supervised,notebook]"
+python -m ipykernel install --sys-prefix --name harss --display-name "HARSS (.venv)"
 python -m unittest discover -s ml/tests -v
 python -m harss_supervised
+python ml/scripts/execute_notebook.py
 ```
 
 Here `python` means the project environment's interpreter, for example
@@ -102,6 +109,11 @@ configuration, training-code hash, data hashes, and software versions. Completed
 fits are verified and reused. An incompatible signature fails; supply
 `--output PATH` for a new comparison. An interrupted unfinished fit restarts;
 completed fits do not retrain.
+
+The recorded Python 3.12 environment's additional package versions are pinned
+in `ml/requirements-supervised-recorded.txt`. Install the CPU PyTorch wheel
+first, then that file to match those package versions. Use one training writer
+per output directory; the notebook should not train concurrently with the CLI.
 
 The interactive entry point is `ml/notebooks/02_supervised_comparison.ipynb`.
 Its training switch calls the same implementation with the same resume checks.
@@ -117,7 +129,7 @@ across hardware and software versions is not guaranteed. Logistic parameter
 counts include coefficients and intercepts; its scaler state is retained
 separately. Neural counts include trainable parameters, not buffers.
 
-- [Logistic regression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html).
+- [Logistic regression](https://scikit-learn.org/1.7/modules/generated/sklearn.linear_model.LogisticRegression.html).
 - [PyTorch 2.9 GRU](https://docs.pytorch.org/docs/2.9/generated/torch.nn.GRU.html).
 - [PyTorch 2.9 reproducibility](https://docs.pytorch.org/docs/2.9/notes/randomness.html).
 - [PyTorch 2.9 export](https://docs.pytorch.org/docs/2.9/export.html).

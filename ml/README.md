@@ -7,7 +7,7 @@ recordings. The supervised comparison is available as a separate optional
 package; Android development remains later work.
 
 Run the commands below from the **repository root**. Python 3.10 or newer is
-required. The package depends only on NumPy; tests use Python's `unittest`.
+required. The base data package depends only on NumPy; tests use Python's `unittest`.
 
 For Module 2, see [the supervised comparison guide](../docs/supervised-module.md)
 and `notebooks/02_supervised_comparison.ipynb`. Install the `supervised` and
@@ -39,7 +39,7 @@ is not activated; on macOS/Linux, use `ml/.venv/bin/python`.
 python -m harss_data download
 python -m harss_data prepare
 python -m harss_data verify
-python -m unittest discover -s ml/tests -v
+python -m unittest discover -s ml/tests -p test_data.py -v
 ```
 
 `download` verifies an existing archive rather than downloading it again. Both

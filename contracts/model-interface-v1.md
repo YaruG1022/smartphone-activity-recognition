@@ -1,8 +1,9 @@
 # Model interface v1
 
-Status: input and label conventions are fixed for data preparation. No trained
-model, export format, inference runtime, or measured output tolerance exists
-yet. A future export must include a manifest satisfying this document.
+Status: input and label conventions are used by data preparation and the
+supervised classifiers. The [supervised guide](../docs/supervised-module.md)
+describes local checkpoints and `.pt2` CPU checks. Android runtime selection
+and on-device validation remain pending.
 
 ## Input
 
@@ -33,11 +34,13 @@ Keep UCI's spelling `LAYING` as the machine-readable name. The UI may display
 "Lying down". This is a six-class, single-label task. There is no trained
 unknown or transition class in v1.
 
-## Planned classifier output and export manifest
+## Classifier output and export manifest
 
-The proposed output is float32 `activity_logits` with shape `[batch, 6]`, in
-the table's order. Apply softmax only when probabilities are needed. This is
-an interface requirement for future work, not an existing export.
+The logical output is float32 `activity_logits` with shape `[batch, 6]`, in
+the table's order. Apply softmax only when probabilities are needed. Current
+Python classifiers return a tensor; `.pt2` graph argument names are generated
+by PyTorch. The export manifest provides the logical names and semantics.
+The initial CPU exports fix batch size to 1.
 
 Each export must identify its model version and SHA-256, preprocessing version,
 input shape, channel order, class order, output semantics, runtime requirements,
