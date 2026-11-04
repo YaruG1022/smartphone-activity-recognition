@@ -1,0 +1,27 @@
+{
+  "description": "Manually specified synthetic Android signal pattern and normalization; not UCI data or classifier predictions.",
+  "preprocessing_version": "preprocessing-v1",
+  "repeat_pattern": 32,
+  "android_input_pattern": [
+    [0, 0, 9.80665, 0, 0, 0],
+    [9.80665, -9.80665, 0, 0.2, -0.4, 0.5],
+    [-9.80665, 9.80665, 19.6133, -0.2, 0.4, -0.5],
+    [4.903325, -4.903325, 9.80665, 0.1, -0.2, 0.25]
+  ],
+  "normalization": {
+    "preprocessing_version": "preprocessing-v1",
+    "channels": ["total_acc_x", "total_acc_y", "total_acc_z", "body_gyro_x", "body_gyro_y", "body_gyro_z"],
+    "fit_partition": "train",
+    "ddof": 0,
+    "minimum_std": 1e-8,
+    "mean": [0, 0, 1, 0, 0, 0],
+    "std": [0.5, 0.5, 1, 0.2, 0.4, 0.5],
+    "scale": [0.5, 0.5, 1, 0.2, 0.4, 0.5]
+  },
+  "expected_standardized_pattern": [
+    [0, 0, 0, 0, 0, 0],
+    [2, -2, -1, 1, -1, 1],
+    [-2, 2, 1, -1, 1, -1],
+    [1, -1, 0, 0.5, -0.5, 0.5]
+  ]
+}

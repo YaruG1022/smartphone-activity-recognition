@@ -1,7 +1,7 @@
 # Preprocessing v1
 
-Status: v1 specification for public-data preparation and the offline phone
-reference. The implementation belongs in `ml/src/harss_data/`. No phone
+Status: v1 specification implemented for public-data preparation and the offline
+phone reference in `ml/src/harss_data/`. No phone
 collection or on-device equivalence has been demonstrated yet.
 
 ## Canonical signal

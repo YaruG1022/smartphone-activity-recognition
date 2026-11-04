@@ -37,7 +37,7 @@ real device must be filled from that device, not copied from this example.
   keep the whole session in that role. Development includes debugging and any
   adaptation. Final-test sessions remain unopened until the method is frozen.
 - `stable_start_ns` and `stable_end_ns` use the same monotonic device clock as
-  the events; start must precede end. Confirm and trim the stable interval
+  the events; both endpoints are inclusive and start must precede end. Confirm and trim the stable interval
   before evaluation. A stable activity change requires a new session.
 - Optional fields: sensor manufacturer/name, app version, collection date,
   placement photograph reference without identifying information, and notes.

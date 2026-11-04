@@ -1,0 +1,307 @@
+{
+  "validation_date_local": "2026-11-03",
+  "timezone": "America/Los_Angeles",
+  "scope": "Data preparation validation only; no model training or real phone collection.",
+  "environment": "Python 3.12.14 and NumPy 2.3.5 from the supplied runtime; editable package installed in ml/.venv with system site packages enabled.",
+  "commands": [
+    "python -m harss_data download",
+    "python -m harss_data prepare",
+    "python -m harss_data verify",
+    "python -m harss_data prepare --output ml/data/prepared/uci-har-v1-recheck",
+    "python -m unittest discover -s ml/tests -v"
+  ],
+  "checks": {
+    "pinned_wrapper_and_original_archive_accepted": true,
+    "official_rows_shapes_labels_and_subjects_valid": true,
+    "subject_partitions_disjoint_and_complete": true,
+    "official_test_subjects_unchanged": true,
+    "normalization_fitted_on_training_only": true,
+    "training_standardized_mean_and_std_checked": true,
+    "all_saved_artifact_hashes_verified": true,
+    "training_source_replay_matches_saved_arrays": true,
+    "first_batch_read_back": true,
+    "two_preparations_have_identical_manifests_and_artifact_hashes": true,
+    "altered_normalization_file_rejected": true,
+    "synthetic_offline_recording_command_passed": true
+  },
+  "unit_tests": {
+    "passed": 23,
+    "failures": 0
+  },
+  "summary": {
+    "verified": true,
+    "windows": {
+      "train": 5658,
+      "validation": 1694,
+      "test": 2947
+    },
+    "first_batch_shape": [
+      32,
+      128,
+      6
+    ],
+    "dtype": "float32",
+    "normalization_fit_subjects": [
+      1,
+      3,
+      6,
+      7,
+      8,
+      14,
+      15,
+      16,
+      17,
+      21,
+      22,
+      25,
+      26,
+      27,
+      28,
+      30
+    ],
+    "source_archive_sha256": "c00b803081a5c797cd5e4b83700a9810b38d53d9d84e01917e090e1fdbc81031"
+  },
+  "manifest": {
+    "schema_version": "data-manifest-v1",
+    "dataset": "uci-har-v1",
+    "preprocessing_version": "preprocessing-v1",
+    "software": {
+      "harss_data": "0.1.0",
+      "python": "3.12.14",
+      "numpy": "2.3.5"
+    },
+    "source_archive_sha256": "c00b803081a5c797cd5e4b83700a9810b38d53d9d84e01917e090e1fdbc81031",
+    "split_config_sha256": "3346e594409c5f2531e0580d4e3c2a99f81e8f25cad2a99be6cc45416b8a114d",
+    "split": {
+      "version": "subjects-v1",
+      "dataset": "uci-har-v1",
+      "selection": "Five fixed official-training subjects selected before model experiments; the official test subjects are unchanged.",
+      "train": [
+        1,
+        3,
+        6,
+        7,
+        8,
+        14,
+        15,
+        16,
+        17,
+        21,
+        22,
+        25,
+        26,
+        27,
+        28,
+        30
+      ],
+      "validation": [
+        5,
+        11,
+        19,
+        23,
+        29
+      ],
+      "test": [
+        2,
+        4,
+        9,
+        10,
+        12,
+        13,
+        18,
+        20,
+        24
+      ]
+    },
+    "channels": [
+      "total_acc_x",
+      "total_acc_y",
+      "total_acc_z",
+      "body_gyro_x",
+      "body_gyro_y",
+      "body_gyro_z"
+    ],
+    "canonical_units": [
+      "g",
+      "g",
+      "g",
+      "rad/s",
+      "rad/s",
+      "rad/s"
+    ],
+    "classes": [
+      "WALKING",
+      "WALKING_UPSTAIRS",
+      "WALKING_DOWNSTAIRS",
+      "SITTING",
+      "STANDING",
+      "LAYING"
+    ],
+    "sample_hz": 50,
+    "window_size": 128,
+    "source_stride": 64,
+    "partitions": {
+      "train": {
+        "file": "train.npz",
+        "official_partition": "train",
+        "windows": 5658,
+        "shape": [
+          5658,
+          128,
+          6
+        ],
+        "subjects": [
+          1,
+          3,
+          6,
+          7,
+          8,
+          14,
+          15,
+          16,
+          17,
+          21,
+          22,
+          25,
+          26,
+          27,
+          28,
+          30
+        ],
+        "class_counts": {
+          "WALKING": 947,
+          "WALKING_UPSTAIRS": 832,
+          "WALKING_DOWNSTAIRS": 752,
+          "SITTING": 988,
+          "STANDING": 1065,
+          "LAYING": 1074
+        }
+      },
+      "validation": {
+        "file": "validation.npz",
+        "official_partition": "train",
+        "windows": 1694,
+        "shape": [
+          1694,
+          128,
+          6
+        ],
+        "subjects": [
+          5,
+          11,
+          19,
+          23,
+          29
+        ],
+        "class_counts": {
+          "WALKING": 279,
+          "WALKING_UPSTAIRS": 241,
+          "WALKING_DOWNSTAIRS": 234,
+          "SITTING": 298,
+          "STANDING": 309,
+          "LAYING": 333
+        }
+      },
+      "test": {
+        "file": "test.npz",
+        "official_partition": "test",
+        "windows": 2947,
+        "shape": [
+          2947,
+          128,
+          6
+        ],
+        "subjects": [
+          2,
+          4,
+          9,
+          10,
+          12,
+          13,
+          18,
+          20,
+          24
+        ],
+        "class_counts": {
+          "WALKING": 496,
+          "WALKING_UPSTAIRS": 471,
+          "WALKING_DOWNSTAIRS": 420,
+          "SITTING": 491,
+          "STANDING": 532,
+          "LAYING": 537
+        }
+      }
+    },
+    "artifacts": {
+      "train.npz": "849b9d935796c8f9ae7a0dd9d6c4978309ae6b1c969f3edd25178f8aa698600e",
+      "validation.npz": "7789abfcb1eaab1c90b682b9a5e6ec19ac5bded66e4bdb4d89eaa26db7d4b500",
+      "test.npz": "ba3c59bcc619ce690c2e5424e477f2c823a30064b737e79ee71d0ff0e518e8a7",
+      "normalization.json": "0e288bcba1499a33edc00530603f6d270eb0f12a04eeccf612d3b26a83014da1",
+      "replay.json": "874b1e2d0b1425b470b906de0006379d8d71e137ef5ba42e261e0b13c3a5fabd"
+    }
+  },
+  "normalization": {
+    "preprocessing_version": "preprocessing-v1",
+    "channels": [
+      "total_acc_x",
+      "total_acc_y",
+      "total_acc_z",
+      "body_gyro_x",
+      "body_gyro_y",
+      "body_gyro_z"
+    ],
+    "fit_partition": "train",
+    "fit_subjects": [
+      1,
+      3,
+      6,
+      7,
+      8,
+      14,
+      15,
+      16,
+      17,
+      21,
+      22,
+      25,
+      26,
+      27,
+      28,
+      30
+    ],
+    "fit_window_count": 5658,
+    "fit_time_point_count": 724224,
+    "ddof": 0,
+    "minimum_std": 1e-08,
+    "mean": [
+      0.8085485523861693,
+      0.009105482570485659,
+      0.07135752426362225,
+      0.0015540028703631514,
+      -0.000952172419714746,
+      0.00034860596426773216
+    ],
+    "std": [
+      0.40602920596159736,
+      0.38440073088052845,
+      0.3687365277466608,
+      0.399825696933421,
+      0.3650696071822569,
+      0.25782263951388623
+    ],
+    "scale": [
+      0.40602920596159736,
+      0.38440073088052845,
+      0.3687365277466608,
+      0.399825696933421,
+      0.3650696071822569,
+      0.25782263951388623
+    ]
+  },
+  "pending": [
+    "Actual phone/device details and consent",
+    "All 36 planned phone recordings",
+    "Measured phone filtering/domain differences and on-device replay",
+    "Model training, self-supervised experiments, and phone inference"
+  ]
+}

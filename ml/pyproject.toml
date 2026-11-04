@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "harss-data"
+version = "0.1.0"
+description = "Subject-isolated smartphone activity data preparation for HARSS"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.26,<3"]
+
+[project.scripts]
+harss-data = "harss_data.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -6,6 +6,10 @@ Module 1 provides reproducible public-data preparation and a specified phone
 collection protocol. It does not train a classifier, run self-supervised
 experiments, implement an Android app, or claim phone accuracy.
 
+The full public-data path and offline recording reference have been executed.
+See [the validation record](data-validation.json) for observed counts, artifact
+hashes, numerical checks, and the tested software versions.
+
 The source is **Human Activity Recognition Using Smartphones, v1.0** by
 Reyes-Ortiz, Anguita, Ghio, Oneto, and Parra. The dataset includes 30 participants,
 six activities, and 10,299 supplied windows. Acquisition used a waist-mounted
@@ -51,6 +55,9 @@ This is one fixed development split, not a claim that it is optimal.
 | Training | 1, 3, 6, 7, 8, 14, 15, 16, 17, 21, 22, 25, 26, 27, 28, 30 | 16 |
 | Validation | 5, 11, 19, 23, 29 | 5 |
 | Test | 2, 4, 9, 10, 12, 13, 18, 20, 24 | 9 |
+
+Preparation yields 5,658 training, 1,694 validation, and 2,947 test windows.
+These are structural data counts, not model evaluation results.
 
 The official test subjects are unchanged. Training and validation together
 cover exactly the official training subjects. All three sets are disjoint.
