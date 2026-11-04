@@ -1,0 +1,46 @@
+# Model interface v1
+
+Status: input and label conventions are fixed for data preparation. No trained
+model, export format, inference runtime, or measured output tolerance exists
+yet. A future export must include a manifest satisfying this document.
+
+## Input
+
+- Name: `sensor_window`.
+- Shape: `[batch, 128, 6]`; the phone normally uses batch size 1.
+- Type: float32, finite values only.
+- Channel order and units before standardization:
+  `total_acc_x`, `total_acc_y`, `total_acc_z` in g, then
+  `body_gyro_x`, `body_gyro_y`, `body_gyro_z` in rad/s.
+- Input values are standardized according to `preprocessing-v1.md`, using the
+  exported training-only `normalization.json` exactly once.
+- A model may transpose internally, but its external interface remains
+  time-major within each batch item. Do not infer the layout from dimension
+  sizes or put normalization both outside and inside the model.
+
+## Classes
+
+| Prepared ID / output index | UCI ID | Name |
+| --- | --- | --- |
+| 0 | 1 | `WALKING` |
+| 1 | 2 | `WALKING_UPSTAIRS` |
+| 2 | 3 | `WALKING_DOWNSTAIRS` |
+| 3 | 4 | `SITTING` |
+| 4 | 5 | `STANDING` |
+| 5 | 6 | `LAYING` |
+
+Keep UCI's spelling `LAYING` as the machine-readable name. The UI may display
+"Lying down". This is a six-class, single-label task. There is no trained
+unknown or transition class in v1.
+
+## Planned classifier output and export manifest
+
+The proposed output is float32 `activity_logits` with shape `[batch, 6]`, in
+the table's order. Apply softmax only when probabilities are needed. This is
+an interface requirement for future work, not an existing export.
+
+Each export must identify its model version and SHA-256, preprocessing version,
+input shape, channel order, class order, output semantics, runtime requirements,
+and the exact normalization file and its SHA-256. Training provenance must link
+the subject split, source archive, configuration, and selected checkpoint.
+Quantized interfaces require a new explicit specification.

@@ -1,5 +1,12 @@
 # Shared contracts
 
-Document the sensor record format, units, channel and label order, sampling
-and windowing rules, normalization, and model input/output here before
-connecting the training pipeline to the Android application.
+Versioned contracts for the public-data pipeline and future Android app:
+
+- [Preprocessing v1](preprocessing-v1.md): channels, units, windows, training-only
+  statistics, and the offline phone reference.
+- [Sensor record v1](sensor-record-v1.md): raw events, metadata, and collection
+  protocol.
+- [Model interface v1](model-interface-v1.md): input layout, labels, and future
+  classifier export requirements.
+
+Phone acquisition and model export are not implemented by these documents.
