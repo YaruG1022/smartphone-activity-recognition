@@ -56,7 +56,7 @@ def confusion_figure(report):
         for i in range(6):
             for j in range(6):
                 if counts[i, j]:
-                    ax.text(j, i, f"{fractions[i,j]:.0%}", ha="center", va="center",
+                    ax.text(j, i, f"{fractions[i,j]:.1%}", ha="center", va="center",
                             fontsize=9, color="white" if fractions[i, j] > 0.55 else "#172554")
         ax.set_xticks(range(6), SHORT_CLASSES, rotation=30, ha="right")
         ax.set_yticks(range(6), SHORT_CLASSES)
@@ -155,7 +155,12 @@ def publish_report(report, directory: Path):
                            ("confusion", confusion_figure), ("learning", learning_figure)):
         fig = function(report)
         fig.savefig(directory / f"{name}.png", dpi=160)
-        fig.savefig(directory / f"{name}.svg", metadata={"Date": None})
+        svg_path = directory / f"{name}.svg"
+        fig.savefig(svg_path, metadata={"Date": None})
+        # Matplotlib leaves spaces at SVG path line endings; keep clean text diffs.
+        svg_path.write_text("\n".join(line.rstrip() for line in
+                                     svg_path.read_text(encoding="utf-8").splitlines()) + "\n",
+                            encoding="utf-8")
         plt.close(fig)
     def score(mean, std):
         return f"{mean:.4f}" if std is None else f"{mean:.4f} ± {std:.4f}"
@@ -173,6 +178,8 @@ def publish_report(report, directory: Path):
         lines.append(f"| {row['model']} | {row['n_runs']} | {accuracy} | {f1} | {row['parameters']:,} | "
                      f"{row['mean_training_seconds']:.2f} | {row['mean_desktop_median_ms']:.3f} |")
     selected = report['selection']['best_model_by_mean_validation_macro_f1']
+    ordered = sorted(report["aggregate"], key=lambda r: -r["validation_macro_f1_mean"])
+    gap = ordered[0]["validation_macro_f1_mean"] - ordered[1]["validation_macro_f1_mean"]
     group = [r for r in report['runs'] if r['model'] == selected]
     recalls = {name: float(np.mean([r['validation']['per_class'][name]['recall'] for r in group]))
                for name in report['classes']}
@@ -180,6 +187,9 @@ def publish_report(report, directory: Path):
     lines += ["", f"The highest mean validation macro-F1 belongs to **{MODEL_NAMES[selected]}**.",
               "This is a development choice for the current split and budget, not evidence of",
               "general superiority or statistical significance.", "",
+              f"The mean macro-F1 difference from {MODEL_NAMES[ordered[1]['model']]} is {gap:.4f}.",
+              "Read this difference together with the seed dispersion in the table; the current",
+              "comparison does not establish a reliable advantage on new subjects.", "",
               f"Its two lowest mean class recalls are {weakest[0]} ({recalls[weakest[0]]:.3f}) and "
               f"{weakest[1]} ({recalls[weakest[1]]:.3f}). The full per-seed matrices and class scores",
               "are in [results.json](results.json).", "",
@@ -197,6 +207,9 @@ def publish_report(report, directory: Path):
               "a saved-and-reloaded `.pt2` CPU export check on six training windows. Export seed",
               "selection is recorded separately and is based on validation, not test scores.", "",
               "Desktop times exclude sensor preprocessing and are not phone measurements.",
+              "Elapsed training times also reflect different stopping epochs and variable desktop",
+              "workload during the session. Treat them as run provenance, not a controlled",
+              "architecture-speed ranking.",
               "The official test set remains unscored. No self-supervised, distillation, or",
               "Android experiment is included. Checkpoints and full predictions stay in ignored",
               "`ml/outputs/supervised-v1/`; rerun the notebook to recreate them.", ""]

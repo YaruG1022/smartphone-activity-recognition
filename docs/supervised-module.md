@@ -99,6 +99,7 @@ python -m pip install -e "./ml[supervised,notebook]"
 python -m ipykernel install --sys-prefix --name harss --display-name "HARSS (.venv)"
 python -m unittest discover -s ml/tests -v
 python -m harss_supervised
+python ml/scripts/publish_supervised.py
 python ml/scripts/execute_notebook.py
 ```
 
@@ -121,6 +122,11 @@ Recorded aggregate results can also be viewed without retraining. Raw data,
 full prediction files, and model artifacts stay local; the executed notebook,
 aggregate results, configuration, and figures are repository deliverables.
 
+The publication script independently recomputes accuracy, class recall, and
+macro-F1 from saved predictions, checks epoch selection and aggregate
+statistics, and verifies that export replay inputs come only from training.
+It saves these checks in `docs/experiments/supervised-v1/validation.json`.
+
 ## Interpretation limits and references
 
 One fixed validation group and three seeds do not establish population-wide
@@ -128,6 +134,9 @@ generalization. No final test or phone result is reported here. Reproducibility
 across hardware and software versions is not guaranteed. Logistic parameter
 counts include coefficients and intercepts; its scaler state is retained
 separately. Neural counts include trainable parameters, not buffers.
+Training wall times also reflect different stopping epochs and variable
+desktop workload during the session. Treat those times as run provenance,
+rather than a controlled architecture-speed ranking.
 
 - [Logistic regression](https://scikit-learn.org/1.7/modules/generated/sklearn.linear_model.LogisticRegression.html).
 - [PyTorch 2.9 GRU](https://docs.pytorch.org/docs/2.9/generated/torch.nn.GRU.html).

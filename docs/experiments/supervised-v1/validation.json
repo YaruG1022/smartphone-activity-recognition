@@ -1,0 +1,18 @@
+{
+  "formal_fits_checked": 10,
+  "saved_prediction_metrics_independently_recomputed": true,
+  "prediction_labels_subjects_and_rows_match_validation": true,
+  "aggregate_means_and_sample_stds_independently_checked": true,
+  "checkpoint_selection_rule_checked": true,
+  "all_local_artifact_hashes_checked": true,
+  "export_replay_inputs_verified_as_training_only": true,
+  "test_arrays_opened": false,
+  "test_scores_computed": false,
+  "training_code_sha256": "8a13c93cf5139ff8a969dc54d3b3e67e1f2cb80828d28c5f3ccc262179140ebc",
+  "hardware": {
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "machine": "AMD64",
+    "logical_cpus": 20,
+    "training_cpu_threads": 2
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "notebook": "ml/notebooks/02_supervised_comparison.ipynb",
+  "notebook_sha256_normalized_lf": "ba39288fb351feecd5a60d6983fe7f2205d9b3f21ac5356dd7e5f986eefbbe49",
+  "notebook_schema_valid": true,
+  "execution": "Real HARSS Jupyter kernel, project .venv; verified completed fits reused",
+  "code_cells_executed": 10,
+  "error_outputs": 0,
+  "embedded_png_figures": 3,
+  "local_and_published_results_identical": true,
+  "unit_tests": {
+    "command": "python -m unittest discover -s ml/tests -v",
+    "passed": 32,
+    "failures": 0
+  },
+  "test_scoring": false
+}

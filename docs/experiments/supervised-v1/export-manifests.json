@@ -1,0 +1,307 @@
+{
+  "exports": [
+    {
+      "model_version": "supervised-v1-cnn-seed570",
+      "model_file": "model.pt2",
+      "model_sha256": "a10b828a4045d519ac4976d37ce1c9202ba0c51199f22e5c9df24c67a94b638f",
+      "format": "torch.export .pt2",
+      "runtime": {
+        "torch": "2.9.1+cpu",
+        "device": "cpu",
+        "android_validated": false
+      },
+      "preprocessing_version": "preprocessing-v1",
+      "input": {
+        "logical_name": "sensor_window",
+        "shape": [
+          1,
+          128,
+          6
+        ],
+        "dtype": "float32",
+        "channels": [
+          "total_acc_x",
+          "total_acc_y",
+          "total_acc_z",
+          "body_gyro_x",
+          "body_gyro_y",
+          "body_gyro_z"
+        ],
+        "standardized": true
+      },
+      "output": {
+        "logical_name": "activity_logits",
+        "shape": [
+          1,
+          6
+        ],
+        "dtype": "float32",
+        "semantics": "logits",
+        "classes": [
+          "WALKING",
+          "WALKING_UPSTAIRS",
+          "WALKING_DOWNSTAIRS",
+          "SITTING",
+          "STANDING",
+          "LAYING"
+        ]
+      },
+      "normalization_file": "normalization.json",
+      "normalization_sha256": "0e288bcba1499a33edc00530603f6d270eb0f12a04eeccf612d3b26a83014da1",
+      "checkpoint_file": "model.pt",
+      "checkpoint_sha256": "be508f64d8376f1bfed02210e72d7e4a957917812271d801068343b2116bb5ac",
+      "selected_epoch": 12,
+      "seed": 570,
+      "training_configuration": {
+        "version": "supervised-v1",
+        "purpose": "Full-label supervised development comparison; validation scores only",
+        "models": [
+          "logistic_regression",
+          "cnn",
+          "gru",
+          "cnn_gru"
+        ],
+        "seeds": [
+          570,
+          571,
+          572
+        ],
+        "device": "cpu",
+        "cpu_threads": 2,
+        "epochs": 30,
+        "patience": 6,
+        "batch_size": 128,
+        "learning_rate": 0.001,
+        "weight_decay": 0.0001,
+        "dropout": 0.2,
+        "conv_channels": [
+          32,
+          64
+        ],
+        "gru_hidden": 64,
+        "gradient_clip_norm": 5.0,
+        "logistic_C": 1.0,
+        "logistic_max_iter": 2000,
+        "selection_metric": "validation_macro_f1",
+        "tie_break": "earliest_epoch",
+        "test_scoring": false
+      },
+      "training_code_sha256": "8a13c93cf5139ff8a969dc54d3b3e67e1f2cb80828d28c5f3ccc262179140ebc",
+      "data_provenance": {
+        "manifest_sha256": "b2808c4ddc8ec5ff394164ed66f6301a4738e6bcf1b1dd37f55b6a43ff2706dc",
+        "training_artifact_hashes": {
+          "train.npz": "849b9d935796c8f9ae7a0dd9d6c4978309ae6b1c969f3edd25178f8aa698600e",
+          "validation.npz": "7789abfcb1eaab1c90b682b9a5e6ec19ac5bded66e4bdb4d89eaa26db7d4b500",
+          "normalization.json": "0e288bcba1499a33edc00530603f6d270eb0f12a04eeccf612d3b26a83014da1"
+        },
+        "source_archive_sha256": "c00b803081a5c797cd5e4b83700a9810b38d53d9d84e01917e090e1fdbc81031",
+        "split_config_sha256": "3346e594409c5f2531e0580d4e3c2a99f81e8f25cad2a99be6cc45416b8a114d",
+        "preprocessing_version": "preprocessing-v1",
+        "test_arrays_opened": false,
+        "test_scores_computed": false
+      }
+    },
+    {
+      "model_version": "supervised-v1-gru-seed572",
+      "model_file": "model.pt2",
+      "model_sha256": "5367a76c1ffd178b5e349f3c7c24a9c55f594e3bb1e46902727a26362d012225",
+      "format": "torch.export .pt2",
+      "runtime": {
+        "torch": "2.9.1+cpu",
+        "device": "cpu",
+        "android_validated": false
+      },
+      "preprocessing_version": "preprocessing-v1",
+      "input": {
+        "logical_name": "sensor_window",
+        "shape": [
+          1,
+          128,
+          6
+        ],
+        "dtype": "float32",
+        "channels": [
+          "total_acc_x",
+          "total_acc_y",
+          "total_acc_z",
+          "body_gyro_x",
+          "body_gyro_y",
+          "body_gyro_z"
+        ],
+        "standardized": true
+      },
+      "output": {
+        "logical_name": "activity_logits",
+        "shape": [
+          1,
+          6
+        ],
+        "dtype": "float32",
+        "semantics": "logits",
+        "classes": [
+          "WALKING",
+          "WALKING_UPSTAIRS",
+          "WALKING_DOWNSTAIRS",
+          "SITTING",
+          "STANDING",
+          "LAYING"
+        ]
+      },
+      "normalization_file": "normalization.json",
+      "normalization_sha256": "0e288bcba1499a33edc00530603f6d270eb0f12a04eeccf612d3b26a83014da1",
+      "checkpoint_file": "model.pt",
+      "checkpoint_sha256": "5e14c33e86e920148a53e9ae1656e9e392f42855255054b5f6ecd5e79f5443f4",
+      "selected_epoch": 24,
+      "seed": 572,
+      "training_configuration": {
+        "version": "supervised-v1",
+        "purpose": "Full-label supervised development comparison; validation scores only",
+        "models": [
+          "logistic_regression",
+          "cnn",
+          "gru",
+          "cnn_gru"
+        ],
+        "seeds": [
+          570,
+          571,
+          572
+        ],
+        "device": "cpu",
+        "cpu_threads": 2,
+        "epochs": 30,
+        "patience": 6,
+        "batch_size": 128,
+        "learning_rate": 0.001,
+        "weight_decay": 0.0001,
+        "dropout": 0.2,
+        "conv_channels": [
+          32,
+          64
+        ],
+        "gru_hidden": 64,
+        "gradient_clip_norm": 5.0,
+        "logistic_C": 1.0,
+        "logistic_max_iter": 2000,
+        "selection_metric": "validation_macro_f1",
+        "tie_break": "earliest_epoch",
+        "test_scoring": false
+      },
+      "training_code_sha256": "8a13c93cf5139ff8a969dc54d3b3e67e1f2cb80828d28c5f3ccc262179140ebc",
+      "data_provenance": {
+        "manifest_sha256": "b2808c4ddc8ec5ff394164ed66f6301a4738e6bcf1b1dd37f55b6a43ff2706dc",
+        "training_artifact_hashes": {
+          "train.npz": "849b9d935796c8f9ae7a0dd9d6c4978309ae6b1c969f3edd25178f8aa698600e",
+          "validation.npz": "7789abfcb1eaab1c90b682b9a5e6ec19ac5bded66e4bdb4d89eaa26db7d4b500",
+          "normalization.json": "0e288bcba1499a33edc00530603f6d270eb0f12a04eeccf612d3b26a83014da1"
+        },
+        "source_archive_sha256": "c00b803081a5c797cd5e4b83700a9810b38d53d9d84e01917e090e1fdbc81031",
+        "split_config_sha256": "3346e594409c5f2531e0580d4e3c2a99f81e8f25cad2a99be6cc45416b8a114d",
+        "preprocessing_version": "preprocessing-v1",
+        "test_arrays_opened": false,
+        "test_scores_computed": false
+      }
+    },
+    {
+      "model_version": "supervised-v1-cnn_gru-seed570",
+      "model_file": "model.pt2",
+      "model_sha256": "ede39bbac20f08e66ff06f8dea398c30cfb7cae0e3ab28e090d155b59f83bd70",
+      "format": "torch.export .pt2",
+      "runtime": {
+        "torch": "2.9.1+cpu",
+        "device": "cpu",
+        "android_validated": false
+      },
+      "preprocessing_version": "preprocessing-v1",
+      "input": {
+        "logical_name": "sensor_window",
+        "shape": [
+          1,
+          128,
+          6
+        ],
+        "dtype": "float32",
+        "channels": [
+          "total_acc_x",
+          "total_acc_y",
+          "total_acc_z",
+          "body_gyro_x",
+          "body_gyro_y",
+          "body_gyro_z"
+        ],
+        "standardized": true
+      },
+      "output": {
+        "logical_name": "activity_logits",
+        "shape": [
+          1,
+          6
+        ],
+        "dtype": "float32",
+        "semantics": "logits",
+        "classes": [
+          "WALKING",
+          "WALKING_UPSTAIRS",
+          "WALKING_DOWNSTAIRS",
+          "SITTING",
+          "STANDING",
+          "LAYING"
+        ]
+      },
+      "normalization_file": "normalization.json",
+      "normalization_sha256": "0e288bcba1499a33edc00530603f6d270eb0f12a04eeccf612d3b26a83014da1",
+      "checkpoint_file": "model.pt",
+      "checkpoint_sha256": "b2dc274deb197e70cb84f574b59f3a7a7d95f1fbbea3e68058778c663ae8ffdd",
+      "selected_epoch": 5,
+      "seed": 570,
+      "training_configuration": {
+        "version": "supervised-v1",
+        "purpose": "Full-label supervised development comparison; validation scores only",
+        "models": [
+          "logistic_regression",
+          "cnn",
+          "gru",
+          "cnn_gru"
+        ],
+        "seeds": [
+          570,
+          571,
+          572
+        ],
+        "device": "cpu",
+        "cpu_threads": 2,
+        "epochs": 30,
+        "patience": 6,
+        "batch_size": 128,
+        "learning_rate": 0.001,
+        "weight_decay": 0.0001,
+        "dropout": 0.2,
+        "conv_channels": [
+          32,
+          64
+        ],
+        "gru_hidden": 64,
+        "gradient_clip_norm": 5.0,
+        "logistic_C": 1.0,
+        "logistic_max_iter": 2000,
+        "selection_metric": "validation_macro_f1",
+        "tie_break": "earliest_epoch",
+        "test_scoring": false
+      },
+      "training_code_sha256": "8a13c93cf5139ff8a969dc54d3b3e67e1f2cb80828d28c5f3ccc262179140ebc",
+      "data_provenance": {
+        "manifest_sha256": "b2808c4ddc8ec5ff394164ed66f6301a4738e6bcf1b1dd37f55b6a43ff2706dc",
+        "training_artifact_hashes": {
+          "train.npz": "849b9d935796c8f9ae7a0dd9d6c4978309ae6b1c969f3edd25178f8aa698600e",
+          "validation.npz": "7789abfcb1eaab1c90b682b9a5e6ec19ac5bded66e4bdb4d89eaa26db7d4b500",
+          "normalization.json": "0e288bcba1499a33edc00530603f6d270eb0f12a04eeccf612d3b26a83014da1"
+        },
+        "source_archive_sha256": "c00b803081a5c797cd5e4b83700a9810b38d53d9d84e01917e090e1fdbc81031",
+        "split_config_sha256": "3346e594409c5f2531e0580d4e3c2a99f81e8f25cad2a99be6cc45416b8a114d",
+        "preprocessing_version": "preprocessing-v1",
+        "test_arrays_opened": false,
+        "test_scores_computed": false
+      }
+    }
+  ]
+}
