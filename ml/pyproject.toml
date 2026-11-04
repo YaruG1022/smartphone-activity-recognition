@@ -4,13 +4,18 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "harss-data"
-version = "0.1.0"
-description = "Subject-isolated smartphone activity data preparation for HARSS"
+version = "0.2.0"
+description = "Subject-isolated data preparation and supervised HAR comparisons"
 requires-python = ">=3.10"
 dependencies = ["numpy>=1.26,<3"]
 
+[project.optional-dependencies]
+supervised = ["torch==2.9.1", "scikit-learn==1.7.2", "matplotlib>=3.9,<4"]
+notebook = ["nbformat>=5.10,<6", "nbclient>=0.10,<1", "ipykernel>=6.29,<7", "pandas>=2.2,<3"]
+
 [project.scripts]
 harss-data = "harss_data.__main__:main"
+harss-supervised = "harss_supervised.__main__:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

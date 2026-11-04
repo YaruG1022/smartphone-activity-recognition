@@ -1,0 +1,22 @@
+{
+  "version": "supervised-v1",
+  "purpose": "Full-label supervised development comparison; validation scores only",
+  "models": ["logistic_regression", "cnn", "gru", "cnn_gru"],
+  "seeds": [570, 571, 572],
+  "device": "cpu",
+  "cpu_threads": 2,
+  "epochs": 30,
+  "patience": 6,
+  "batch_size": 128,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "dropout": 0.2,
+  "conv_channels": [32, 64],
+  "gru_hidden": 64,
+  "gradient_clip_norm": 5.0,
+  "logistic_C": 1.0,
+  "logistic_max_iter": 2000,
+  "selection_metric": "validation_macro_f1",
+  "tie_break": "earliest_epoch",
+  "test_scoring": false
+}

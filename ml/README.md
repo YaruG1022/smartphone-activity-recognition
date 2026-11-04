@@ -3,10 +3,15 @@
 Module 1 is implemented as the small NumPy package `harss-data`. It downloads
 or accepts a pinned UCI HAR archive, prepares subject-isolated six-channel
 windows, saves training-only normalization, and validates offline phone
-recordings. Model training and Android development are later modules.
+recordings. The supervised comparison is available as a separate optional
+package; Android development remains later work.
 
 Run the commands below from the **repository root**. Python 3.10 or newer is
 required. The package depends only on NumPy; tests use Python's `unittest`.
+
+For Module 2, see [the supervised comparison guide](../docs/supervised-module.md)
+and `notebooks/02_supervised_comparison.ipynb`. Install the `supervised` and
+`notebook` extras before running the comparison or the additional tests.
 
 ## Install
 
