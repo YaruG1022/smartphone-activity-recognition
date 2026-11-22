@@ -1,0 +1,21 @@
+{
+  "schema_version": "official-test-protocol-v1",
+  "supervised_models": ["logistic_regression", "cnn", "gru", "cnn_gru"],
+  "self_supervised_model": "cnn",
+  "methods": ["scratch", "pretrained"],
+  "label_percents": [10, 25, 100],
+  "seeds": [570, 571, 572],
+  "evaluation": {
+    "primary_metric": "macro_f1",
+    "secondary_metrics": ["accuracy", "per_class", "confusion_matrix"],
+    "paired_contrast": "pretrained_minus_scratch_within_label_percent_and_seed",
+    "scope": "All four supervised baselines and both SSL arms at every label budget and seed"
+  },
+  "selection": {
+    "partition": "validation",
+    "eligible_candidates": ["supervised/logistic_regression", "supervised/cnn", "supervised/gru", "supervised/cnn_gru", "self_supervised/pretrained/100"],
+    "candidate_rank": ["highest_mean_macro_f1", "fewest_parameters", "lowest_candidate_id"],
+    "run_rank": ["highest_macro_f1", "lowest_seed"],
+    "test_feedback": false
+  }
+}
