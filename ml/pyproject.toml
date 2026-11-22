@@ -10,7 +10,7 @@ requires-python = ">=3.10"
 dependencies = ["numpy>=1.26,<3"]
 
 [project.optional-dependencies]
-supervised = ["torch==2.9.1", "scikit-learn==1.7.2", "matplotlib>=3.9,<4"]
+supervised = ["torch==2.9.1", "scikit-learn==1.7.2", "matplotlib>=3.9,<4", "filelock>=3.9,<5"]
 notebook = ["nbformat>=5.10,<6", "nbclient>=0.10,<1", "ipykernel>=6.29,<7", "pandas>=2.2,<3"]
 
 [project.scripts]

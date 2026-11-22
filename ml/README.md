@@ -13,6 +13,10 @@ For Module 2, see [the supervised comparison guide](../docs/supervised-module.md
 and `notebooks/02_supervised_comparison.ipynb`. Install the `supervised` and
 `notebook` extras before running the comparison or the additional tests.
 
+The [desktop experiment record](../docs/experiments/desktop-v1/README.md)
+covers masked pretraining, validation-only model selection, and the official
+held-out evaluation. It includes the commands for reproducing both stages.
+
 ## Install
 
 Windows PowerShell:
